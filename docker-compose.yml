@@ -9,12 +9,14 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
+    image: naoufalbelhour/multi-nginx
     ports:
       - '3050:80'
   api:
     build:
       dockerfile: Dockerfile.dev
       context: ./server
+    image: naoufalbelhour/multi-server
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -30,6 +32,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./client
+    image: naoufalbelhour/multi-client
     volumes:
       - /app/node_modules
       - ./client:/app
@@ -37,6 +40,7 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    image: naoufalbelhour/multi-worker
     build:
       dockerfile: Dockerfile.dev
       context: ./worker
